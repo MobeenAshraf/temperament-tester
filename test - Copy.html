@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Questionnaire</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <script>
+
+        // Array Remove - By John Resig (MIT Licensed)
+        Array.prototype.remove = function(from, to) {
+            var rest = this.slice((to || from) + 1 || this.length);
+            this.length = from < 0 ? this.length + from : from;
+            return this.push.apply(this, rest);
+        };
+
+$(document).ready(function(){
+            $("#but").click(function(){
+                var bo=true;
+                $('.sec1').each(function()
+                {
+                    if($(this).val()==""||Number($(this).val())>5||Number($(this).val())<1)
+                    {  alert("Please Fill All Options, with input range between 1 to 5");
+bo=false;
+                        return false;
+                        }
+
+                });
+if(bo) {
+    $('.sec2').each(function () {
+        if ($(this).val() == "" || Number($(this).val()) > 5 || Number($(this).val()) < 1) {
+            alert("Please Fill All Options, with input range between 1 to 5");
+            bo = false;
+            return false;
+        }
+
+    });
+}
+                if(bo) {
+                    $('.sec3').each(function () {
+                        if ($(this).val() == "" || Number($(this).val()) > 5 || Number($(this).val()) < 1) {
+                            alert("Please Fill All Options, with input range between 1 to 5");
+                            bo = false;
+                            return false;
+                        }
+
+                    });
+
+                }
+                if(bo) {
+                    $('.sec4').each(function () {
+                        if ($(this).val() == "" || Number($(this).val()) > 5 || Number($(this).val()) < 1) {
+                            alert("Please Fill All Options, with input range between 1 to 5");
+                            bo = false;
+                            return false;
+                        }
+
+                    });
+
+                }
+if(bo) {
+    var sum1 = 0
+    $('.sec1').each(function () {
+        if (Number($(this).val()) > 2)
+            sum1 += Number($(this).val());
+    });
+
+    var sum2 = 0
+    $('.sec2').each(function () {
+        if (Number($(this).val()) > 2)
+            sum2 += Number($(this).val());
+    });
+
+    var sum3 = 0
+    $('.sec3').each(function () {
+        if (Number($(this).val()) > 2)
+            sum3 += Number($(this).val());
+    });
+
+    var sum4 = 0
+    $('.sec4').each(function () {
+        if (Number($(this).val()) > 2)
+            sum4 += Number($(this).val());
+    });
+
+    var numArray = [{name: 'sec1', value: sum1}, {name: 'sec2', value: sum2}, {
+        name: 'sec3',
+        value: sum3
+    }, {name: 'sec4', value: sum4}];
+    var maxProp = 0;
+
+    for (var prop in numArray) {
+        if (numArray[maxProp].value < numArray[prop].value) {
+            maxProp = prop;
+        }
+    }
+    //     alert(numArray[maxProp].name+" "+numArray[maxProp].value);
+    var primary;
+    if (numArray[maxProp].name == 'sec1')
+        primary = "Sanguine Temperament (fun-loving extrovert; outgoing; very social; the life of the party) - EXTROVERT";
+    else if (numArray[maxProp].name == 'sec2')
+        primary = "Choleric Temperament (focused; extrovert; goal oriented; the achiever) - EXTROVERT";
+    else if (numArray[maxProp].name == 'sec3')
+        primary = "Melancholy Temperament (detailed; introspective; artistic; the naturally gifted) - INTROVERT";
+    else
+        primary = "Phlegmatic Temperament (easy going; stable; consistent; the loyal friend) - INTROVERT"
+    numArray.remove(maxProp);
+
+    maxProp = 0;
+
+    for (var prop in numArray) {
+        if (numArray[maxProp].value < numArray[prop].value) {
+            maxProp = prop;
+        }
+    }
+    //  alert(numArray[maxProp].name+" "+numArray[maxProp].value);
+
+    var second;
+
+    if (numArray[maxProp].name == 'sec1')
+        second = "Sanguine Temperament (fun-loving extrovert; outgoing; very social; the life of the party) - EXTROVERT";
+    else if (numArray[maxProp].name == 'sec2')
+        second = "Choleric Temperament (focused; extrovert; goal oriented; the achiever) - EXTROVERT";
+    else if (numArray[maxProp].name == 'sec3')
+        second = "Melancholy Temperament (detailed; introspective; artistic; the naturally gifted) - INTROVERT";
+    else
+        second = "Phlegmatic Temperament (easy going; stable; consistent; the loyal friend) - INTROVERT"
+    numArray.remove(maxProp);
+
+
+    $("#myModal").modal();
+
+    $(".modal-body #primary").text(primary);
+
+    $(".modal-body #Sec").text(second);
+
+}
+            });
+
+
+
+
+});
+
+
+
+
+
+       function fill() {
+           var cars = ["Emotional", "Egotistical", "Interrupt Others","Compassionate","Impulsive","Disorganized","Impractical","Funny","Forgetful","Easily Discouraged","Very Positive","Easily Angered","Undisciplined","Extrovert","Refreshing","Lively / Spirited","Weak-willed","Spontaneous","Talkative","Delightful","Enjoyable","Popular","Friendly /Sociable"," Bouncy ","Restless","Difficulty Concentrating","Likes To Play","Difficulty keeping Resolutions","Lives in Present","Difficulty With Appointments"];
+          var  html=" <div class='table-responsive'> <table class='table'> <tbody>"
+           for(i=0;i<cars.length;i++)
+           {
+               if(i%3==0)
+               html= html+ "<tr><td> <div class='form-group'> <label class='col-sm-4 control-label'>"+cars[i]+"</label> <div class='col-sm-2'> <input class='sec1' type='number'  min='1'  max='5' > </div></div></td>";
+               else
+                   html= html+ "<td> <div class='form-group'> <label class='col-sm-4 control-label'>"+cars[i]+" </label> <div class='col-sm-2'> <input class='sec1' type='number'  min='1'  max='5' > </div></div></td>";
+
+           }
+
+
+     html=html+"  </tr> </tbody> </table>"
+           document.getElementById("sec1").innerHTML = html;
+
+
+
+            cars = ["Optimistic", "Determined", "Bossy","Goal Oriented","Decisive","Frank","Self Confident","Sarcastic","Workaholic","Self Sufficient","Practical","Head Strong","Activist","Outgoing","Domineering","Adventurous","Agressive","Competitive","Leadership ability","Daring","Preserving","Bold","Strong Willed","Persuasive","Hot Tempered","Resourceful","Insensitive","Outspoken","Unsympathetic","Productive"];
+             html=" <div class='table-responsive'> <table class='table'> <tbody>"
+           for(i=0;i<cars.length;i++)
+           {
+               if(i%3==0)
+                   html= html+ "<tr><td> <div class='form-group'> <label class='col-sm-4 control-label'>"+cars[i]+"</label> <div class='col-sm-2'> <input class='sec2' type='number'  min='1'  max='5' > </div></div></td>";
+               else
+                   html= html+ "<td> <div class='form-group'> <label class='col-sm-4 control-label'>"+cars[i]+" </label> <div class='col-sm-2'> <input class='sec2'  type='number'  min='1'  max='5' > </div></div></td>";
+
+           }
+
+
+           html=html+"  </tr> </tbody> </table>"
+           document.getElementById("sec2").innerHTML = html;
+
+
+            cars = ["Deep Feeling", "Critical", "Insecure","Sensitive","Indecisive","Hard To Please","Self Centered","Pessimistic","Depressed Easily","Easily Offended","Idealistic","Loner","Self Sacrificing","Introvert","Faithful Friend","Analytical","Considerate","Likes Behind Scenes","Suspicious","Respectful","Introspective","Planner","Perfectionist","Scheduled","Unforgiving /Resents","Orderly","Creative","Detailed","Moody","Gifted -Musically/Athletically "];
+             html=" <div class='table-responsive'> <table class='table'> <tbody>"
+           for(i=0;i<cars.length;i++)
+           {
+               if(i%3==0)
+                   html= html+ "<tr><td> <div class='form-group'> <label class='col-sm-4 control-label'>"+cars[i]+"</label> <div class='col-sm-2'> <input class='sec3' type='number'  min='1'  max='5' > </div></div></td>";
+               else
+                   html= html+ "<td> <div class='form-group'> <label class='col-sm-4 control-label'>"+cars[i]+" </label> <div class='col-sm-2'> <input class='sec3' type='number'  min='1'  max='5' > </div></div></td>";
+
+           }
+
+
+           html=html+"  </tr> </tbody> </table>"
+           document.getElementById("sec3").innerHTML = html;
+
+
+         cars = ["Very Quite", "Selfish", "Unenthusiastic","Negative","Regular Daily Habits","Hesitant","Shy","Stingy","Aimless","Not Aggressive","Stubborn","Worrier","Spectator Of Life","Works Well Under Pressure","Indecisive","Adaptable","Slow And Lazy","Submissive To Others","Easy Going","Reserved","Calm and Cool","Content /Satisfied","Efficient","Patient","Dependable","Listener","Witty /Dry Humor","Pleasant","Teases Others","Consistent"];
+             html=" <div class='table-responsive'> <table class='table'> <tbody>"
+           for(i=0;i<cars.length;i++)
+           {
+               if(i%3==0)
+                   html= html+ "<tr><td> <div class='form-group'> <label class='col-sm-4 control-label'>"+cars[i]+"</label> <div class='col-sm-2'> <input class='sec4' type='number'  min='1'  max='5' > </div></div></td>";
+               else
+                   html= html+ "<td> <div class='form-group'> <label class='col-sm-4 control-label'>"+cars[i]+" </label> <div class='col-sm-2'> <input class='sec4' type='number'  min='1'  max='5' > </div></div></td>";
+
+           }
+
+
+           html=html+"  </tr> </tbody> </table>"
+           document.getElementById("sec4").innerHTML = html;
+
+       }
+    </script>
+</head>
+<body onload ="fill()">
+
+<div class="container">
+    <h2> Temparament Test Queationnaire</h2>
+    <ul class="nav nav-pills">
+        <li class="active"><a data-toggle="pill" href="#sec1">Section 1</a></li>
+        <li><a data-toggle="pill" href="#sec2">Section 2</a></li>
+        <li><a data-toggle="pill" href="#sec3">Section 3</a></li>
+        <li><a data-toggle="pill" href="#sec4">Section 4</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="sec1" class="tab-pane fade in active">
+
+
+            </div>
+
+        <div id="sec2" class="tab-pane fade">
+
+
+        </div>
+        <div id="sec3" class="tab-pane fade">
+
+        </div>
+        <div id="sec4" class="tab-pane fade">
+
+        </div>
+    </div>
+    <button type="button" id="but" class="btn btn-primary btn-block" onclick="find()">Find Result</button>
+
+</div>
+
+
+
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Your Temperament</h4>
+            </div>
+            <div class="modal-body">
+            <div class='form-group'>
+            <label class='col-sm-4 control-label'> Primary Temperament :   </label>
+                </br>
+
+            <p id="primary" style="font-weight:normal; font-size: 0.995em;" ></p>
+            </br>
+                </div>
+
+                <div class='form-group'>
+                    <label class='col-sm-4 control-label'> Secondary  Temperament :  </label>
+                    <br>
+                    <p id="Sec"style="font-weight:normal; font-size: 0.995em;" ></p>
+                    </br>
+                </div>
+
+
+                <div class='form-group'>
+                    <label class='col-sm-4 control-label'> Combo :   </label>
+                    </br>
+                    <label id="comb" ></label>
+                    </br>
+                </div>
+
+        </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
